@@ -1,5 +1,11 @@
 # Sistema Bancário em Java
 
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![POO](https://img.shields.io/badge/POO-Orientação_a_Objetos-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Concluído-success?style=for-the-badge)
+
+> Sistema bancário desenvolvido em Java utilizando conceitos de Programação Orientada a Objetos (POO)
+
 ## IDENTIFICAÇÃO
 **Nome:** Kauê Cavalcante
 **Matrícula:** 1231501747

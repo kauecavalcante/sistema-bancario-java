@@ -1,0 +1,33 @@
+# Arquivos compilados do Java
+*.class
+
+# Arquivos de pacote
+*.jar
+*.war
+*.ear
+
+# Arquivos de log
+*.log
+
+# Diretórios do IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Diretórios do Maven
+target/
+
+# Diretórios do Gradle
+.gradle/
+build/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*~
+*.swp
+*.swo
