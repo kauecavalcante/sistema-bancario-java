@@ -1,59 +1,95 @@
-# Sistema Bancário em Java
+# Sistema Bancário em Java - Versão 2.0
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![POO](https://img.shields.io/badge/POO-Orientação_a_Objetos-blue?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Concluído-success?style=for-the-badge)
+![POO](https://img.shields.io/badge/POO-Avan%C3%A7ado-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Conclu%C3%ADdo-success?style=for-the-badge)
+![Version](https://img.shields.io/badge/Vers%C3%A3o-2.0-purple?style=for-the-badge)
 
-> Sistema bancário desenvolvido em Java utilizando conceitos de Programação Orientada a Objetos (POO)
+> Sistema bancário avançado desenvolvido em Java utilizando conceitos avançados de Programação Orientada a Objetos (POO)
 
 ## IDENTIFICAÇÃO
+
 **Nome:** Kauê Cavalcante
 **Matrícula:** 1231501747
 **Disciplina:** PROJETO DE PROGRAMAÇÃO
 **Professor:** Amaury
+**Versão:** 2.0 - Evolução Arquitetural
+
+---
+
+## EXPLICAÇÃO DA ARQUITETURA
+
+### Por que `Conta` é abstrata?
+
+A classe `Conta` foi transformada em abstrata porque:
+- **Conceito genérico:** Representa um conceito abstrato de conta bancária que não deve ser instanciado diretamente
+- **Força especialização:** Obriga a criação de tipos específicos de conta (ContaCorrente, ContaPoupanca)
+- **Base comum:** Define comportamentos e atributos comuns que são herdados por todas as especializações
+- **Design pattern:** Segue o padrão Template Method, fornecendo implementações padrão que podem ser sobrescritas
+- **Mundo real:** No mundo real, não existe uma "conta genérica", apenas tipos específicos de conta
+
+### Por que `Tributavel` é interface?
+
+A interface `Tributavel` foi escolhida porque:
+- **Contrato:** Define um contrato que qualquer classe pode implementar, não apenas contas
+- **Flexibilidade:** Permite que diferentes tipos de objetos sejam tributáveis (contas, investimentos, etc.)
+- **Herança múltipla:** Java não permite herança múltipla de classes, mas permite implementar múltiplas interfaces
+- **Separação de responsabilidades:** Separa a lógica de tributação da hierarquia de contas
+- **Opcional:** Nem todas as contas são tributáveis (ContaPoupanca é isenta)
+
+### Como ocorre o polimorfismo no cálculo de imposto?
+
+O polimorfismo no cálculo de imposto funciona assim:
+
+1. **Interface comum:** A `CalculadoraDeImposto` aceita qualquer objeto que implemente `Tributavel`
+2. **Método polimórfico:** O método `registrar(Tributavel t)` não conhece o tipo específico do objeto
+3. **Binding dinâmico:** Em tempo de execução, o Java chama o método `calcularTributo()` correto
+4. **Implementações diferentes:** Cada classe tributável pode ter sua própria fórmula de cálculo
+5. **Extensibilidade:** Novos tipos tributáveis podem ser adicionados sem modificar a calculadora
+
+**Exemplo prático:**
+```java
+Tributavel obj = new ContaCorrente(...);  // Polimorfismo
+calculadora.registrar(obj);  // Chama calcularTributo() de ContaCorrente
+```
 
 ---
 
 ## COMO EXECUTAR
 
-Para executar o sistema, abra o terminal na pasta do projeto e execute os seguintes comandos:
+### Compilação
 
 ```bash
+# Navegue até o diretório do projeto
+cd atividade-banco-java
+
+# Compile todos os arquivos Java
 javac *.java
-java Main
 ```
 
-O programa iniciará e exibirá o menu principal com as opções disponíveis.
+### Execução
 
----
-
-## FUNCIONALIDADES IMPLEMENTADAS
-
-- Criar conta (Corrente ou Poupança)
-- Listar contas existentes
-- Depositar dinheiro em uma conta
-- Sacar dinheiro de uma conta
-- Transferir dinheiro entre contas
-- Consultar saldo de uma conta
-- Validação de saldo insuficiente
-- Herança e Polimorfismo (Conta, ContaCorrente, ContaPoupanca)
-- Encapsulamento de atributos
-- Lista de objetos com ArrayList
+```bash
+# Execute o programa principal
+java Main
+```
 
 ---
 
 ## EXEMPLO DE EXECUÇÃO
 
 ```
-===== BANCO JAVA =====
+===== BANCO JAVA - VERSÃO 2.0 =====
 1 - Criar conta
 2 - Listar contas
 3 - Depositar
 4 - Sacar
 5 - Transferir
 6 - Consultar saldo
+7 - Calcular tributos
+8 - Autenticar gerente
 0 - Sair
-======================
+====================================
 Escolha uma opção: 1
 
 ----- CRIAR CONTA -----
@@ -66,125 +102,59 @@ Conta Corrente criada com sucesso!
 Número da conta: 1001
 Titular: João Silva
 
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
-Escolha uma opção: 1
-
------ CRIAR CONTA -----
-Tipo de conta:
-1 - Corrente
-2 - Poupança
-Escolha o tipo: 2
-Digite o nome do titular: Maria Santos
-Conta Poupança criada com sucesso!
-Número da conta: 1002
-Titular: Maria Santos
-
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
-Escolha uma opção: 2
-
-===== LISTA DE CONTAS =====
-1 - Conta: 1001 | Titular: João Silva | Tipo: Conta Corrente | Saldo: R$ 0.0
-2 - Conta: 1002 | Titular: Maria Santos | Tipo: Conta Poupança | Saldo: R$ 0.0
-===========================
-
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
+===== BANCO JAVA - VERSÃO 2.0 =====
 Escolha uma opção: 3
 
 ----- DEPOSITAR -----
 Digite o número da conta: 1001
-Digite o valor do depósito: R$ 1000
+Digite o valor do depósito: R$ 5000
 Depósito realizado com sucesso!
-Novo saldo: R$ 1000.0
+Novo saldo: R$ 5000.0
 
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
-Escolha uma opção: 6
+===== BANCO JAVA - VERSÃO 2.0 =====
+Escolha uma opção: 7
 
------ CONSULTAR SALDO -----
-Digite o número da conta: 1001
-===== EXTRATO =====
-Conta: 1001
-Titular: João Silva
-Saldo: R$ 1000.0
-===================
+----- CALCULAR TRIBUTOS -----
+Contador de tributos zerado.
 
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
-Escolha uma opção: 5
+----- Calculando tributo -----
+Conta: 1001 - Titular: João Silva
+Saldo: R$ 5000,00
+Tributo calculado: R$ 50,00
+Total acumulado: R$ 50,00
+============================
+RELATÓRIO DE TRIBUTOS
+============================
+Total de tributos: R$ 50,00
+============================
 
------ TRANSFERIR -----
-Digite o número da conta de origem: 1001
-Digite o número da conta de destino: 1002
-Digite o valor da transferência: R$ 300
-Saque realizado com sucesso!
-Novo saldo: R$ 700.0
-Depósito realizado com sucesso!
-Novo saldo: R$ 300.0
-Transferência realizada com sucesso!
+===== BANCO JAVA - VERSÃO 2.0 =====
+Escolha uma opção: 8
 
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
-Escolha uma opção: 4
+----- AUTENTICAÇÃO DE GERENTE -----
+Gerente: João Silva
+Departamento: Operações
+Digite a senha: senha123
+Funcionário João Silva autenticado com sucesso!
+Gerente do departamento Operações tem acesso total ao sistema.
 
------ SACAR -----
-Digite o número da conta: 1001
-Digite o valor do saque: R$ 1000
-Saldo insuficiente!
+----- MENU DO GERENTE -----
+1 - Exibir informações do gerente
+2 - Exibir relatório gerencial
+3 - Aprovar operação
+0 - Voltar ao menu principal
+Escolha uma opção: 3
 
-===== BANCO JAVA =====
-1 - Criar conta
-2 - Listar contas
-3 - Depositar
-4 - Sacar
-5 - Transferir
-6 - Consultar saldo
-0 - Sair
-======================
+Descreva a operação a aprovar: Liberação de crédito especial
+============================
+APROVAÇÃO DE OPERAÇÃO
+============================
+Gerente: João Silva
+Operação: Liberação de crédito especial
+Status: APROVADA
+============================
+
+===== BANCO JAVA - VERSÃO 2.0 =====
 Escolha uma opção: 0
 Encerrando o sistema... Até logo!
 ```
@@ -193,28 +163,147 @@ Encerrando o sistema... Até logo!
 
 ## ESTRUTURA DO PROJETO
 
-- **Conta.java** - Classe base que representa uma conta bancária genérica
-- **ContaCorrente.java** - Classe que herda de Conta e representa uma conta corrente
-- **ContaPoupanca.java** - Classe que herda de Conta e representa uma conta poupança
-- **Banco.java** - Classe que gerencia todas as contas (usa ArrayList)
-- **Main.java** - Classe principal com menu interativo
+### Diagrama de Classes
+
+```
+                    ┌─────────────────────┐
+                    │ <<interface>>       │
+                    │   Tributavel        │
+                    ├─────────────────────┤
+                    │ +calcularTributo()  │
+                    └──────────┬──────────┘
+                               │implements
+                    ┌──────────▼──────────┐
+     ┌──────────────┤  <<abstract>>       │
+     │              │      Conta          │
+     │              ├─────────────────────┤
+     │              │ -numeroConta        │
+     │              │ -titular            │
+     │              │ #saldo              │
+     │              └──────────┬──────────┘
+     │                         │extends
+     │              ┌──────────┴──────────┐
+     │              │                     │
+┌────▼────────┐ ┌──▼──────────┐
+│ContaCorrente│ │ContaPoupanca│
+├─────────────┤ ├─────────────┤
+│-taxaManut.  │ │-taxaRend.   │
+├─────────────┤ ├─────────────┤
+│+calcularTrib│ │+aplicarRend.│
+└─────────────┘ └─────────────┘
+
+     ┌─────────────────────┐
+     │ <<interface>>       │
+     │   Autenticavel      │
+     ├─────────────────────┤
+     │ +autenticar()       │
+     └──────────┬──────────┘
+                │implements
+     ┌──────────▼──────────┐
+     │    Funcionario      │
+     ├─────────────────────┤
+     │ -nome,-cpf,-senha   │
+     └──────────┬──────────┘
+                │extends
+     ┌──────────▼──────────┐
+     │      Gerente        │
+     ├─────────────────────┤
+     │ -departamento       │
+     │ +aprovarOperacao()  │
+     └─────────────────────┘
+```
+
+### Arquivos do Projeto
+
+- **Conta.java** - Classe abstrata base para todas as contas
+- **ContaCorrente.java** - Conta que implementa Tributavel (paga 1% de tributo)
+- **ContaPoupanca.java** - Conta isenta de tributos
+- **Banco.java** - Gerenciador de contas com ArrayList
+- **Main.java** - Interface CLI com menu interativo
+- **Tributavel.java** - Interface para objetos tributáveis
+- **CalculadoraDeImposto.java** - Calcula e acumula tributos
+- **Autenticavel.java** - Interface para autenticação
+- **Funcionario.java** - Classe base de funcionários autenticáveis
+- **Gerente.java** - Especialização de funcionário com poderes especiais
 
 ---
 
-## CONCEITOS DE POO UTILIZADOS
+## FUNCIONALIDADES IMPLEMENTADAS
 
-1. **Herança:** ContaCorrente e ContaPoupanca herdam de Conta
-2. **Polimorfismo:** Método getTipoConta() sobrescrito nas classes filhas
-3. **Encapsulamento:** Atributos privados com getters
-4. **ArrayList:** Usado para armazenar lista de contas
-5. **Scanner:** Para ler entrada do usuário
-6. **Loop while:** Menu interativo que roda até o usuário sair
+### Funcionalidades Básicas (v1.0)
+1. ✅ Criar conta (Corrente ou Poupança)
+2. ✅ Listar contas existentes
+3. ✅ Depositar valores
+4. ✅ Sacar valores
+5. ✅ Transferir entre contas
+6. ✅ Consultar saldo
+
+### Novas Funcionalidades (v2.0)
+7. ✅ **Calcular tributos de contas correntes**
+   - ContaCorrente paga 1% do saldo
+   - ContaPoupanca é isenta
+   - Relatório consolidado de tributos
+
+8. ✅ **Autenticar gerente**
+   - Sistema de login com senha
+   - Menu exclusivo do gerente
+   - Aprovar operações especiais
+   - Visualizar relatórios gerenciais
 
 ---
 
-## OBSERVAÇÕES
+## CONCEITOS DE POO DEMONSTRADOS
 
-- As contas são numeradas automaticamente a partir de 1001
-- O sistema valida saldo insuficiente em saques e transferências
-- Todos os métodos têm comentários explicativos para facilitar o entendimento
+| Conceito | Onde Aparece | Descrição |
+|----------|--------------|-----------|
+| **Abstração** | Classe `Conta` | Define estrutura base sem permitir instanciação direta |
+| **Herança** | `ContaCorrente`, `ContaPoupanca`, `Gerente` | Reutilização e especialização de código |
+| **Polimorfismo** | Uso de `Tributavel` | Diferentes implementações para calcularTributo() |
+| **Interfaces** | `Tributavel` e `Autenticavel` | Contratos que definem comportamentos obrigatórios |
+| **Reutilização** | Lógica de saldo na classe `Conta` | Código compartilhado entre todas as subclasses |
+| **Estruturas Dinâmicas** | `ArrayList<Conta>` | Gerenciamento dinâmico e ilimitado de contas |
+| **Encapsulamento** | Atributos privados | Proteção de dados com acesso controlado |
+| **Composição** | `Banco` contém `ArrayList<Conta>` | Relacionamento "tem-um" |
 
+---
+
+## DETALHES TÉCNICOS
+
+### Sistema de Tributos
+- **Taxa:** ContaCorrente paga 1% do saldo como tributo
+- **Isenção:** ContaPoupanca não implementa Tributavel (isenta)
+- **Acumulação:** CalculadoraDeImposto soma todos os tributos
+- **Relatório:** Exibe total consolidado de impostos
+
+### Sistema de Autenticação
+- **Senha padrão:** senha123
+- **Gerente padrão:** João Silva (criado automaticamente)
+- **Departamento:** Operações
+- **Poderes especiais:** Aprovar operações, visualizar relatórios
+
+### Validações Implementadas
+- ✅ Valores positivos para depósitos e saques
+- ✅ Verificação de saldo insuficiente
+- ✅ Autenticação por senha
+- ✅ Existência de conta antes de operações
+- ✅ Tipo de conta na criação (1 ou 2)
+
+---
+
+## OBSERVAÇÕES FINAIS
+
+- **Compatibilidade:** Mantém todas as funcionalidades da versão 1.0
+- **Extensibilidade:** Arquitetura preparada para novos tipos de conta e funcionários
+- **Demonstração:** Gerente padrão criado para facilitar testes
+- **Educacional:** Código comentado para fins didáticos
+- **Evolução:** Sistema evoluiu de básico para arquitetura robusta
+
+---
+
+## AUTOR
+
+Desenvolvido por **Kauê Cavalcante** como trabalho acadêmico para a disciplina de Projeto de Programação, sob orientação do Professor Amaury.
+
+---
+
+*Versão 2.0 - Evolução Arquitetural do Sistema Bancário*

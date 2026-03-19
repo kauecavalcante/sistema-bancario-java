@@ -1,5 +1,5 @@
-// Classe base para todas as contas
-public class Conta {
+// Classe base abstrata para todas as contas
+public abstract class Conta {
     // Atributos (variáveis) da conta
     private String numeroConta;
     private String titular;

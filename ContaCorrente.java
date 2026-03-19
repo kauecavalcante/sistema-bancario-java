@@ -1,6 +1,6 @@
 // Classe que representa uma Conta Corrente
-// Ela herda (extends) da classe Conta
-public class ContaCorrente extends Conta {
+// Ela herda (extends) da classe Conta e implementa Tributavel
+public class ContaCorrente extends Conta implements Tributavel {
     // Atributo específico da conta corrente
     private double taxaManutencao;
 
@@ -29,5 +29,12 @@ public class ContaCorrente extends Conta {
 
     public double getTaxaManutencao() {
         return taxaManutencao;
+    }
+
+    // Implementação do método da interface Tributavel
+    @Override
+    public double calcularTributo() {
+        // Conta corrente paga 1% do saldo como tributo
+        return saldo * 0.01;
     }
 }
